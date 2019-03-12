@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	table {
+		border : none;
+		border-collapse: collapse;
+	}
+	td{
+		padding: 5px;
+		border: none;
+	}
+	input[type=text]{
+		padding: 10px;
+		width: 410px;
+		border-style: solid;
+		text-align: right;
+		font-size: 16px;
+	}
+	input[type=text]:disabled{
+		background-color: white;
+	}
+	.button {
+		width: 100px;
+		height: 40px;
+		background-color: #4CAF50;
+    	border: none;
+    	color: white;
+    	padding: 10px;
+    	font-size: 16px;
+    	cursor: pointer;
+	}
+	.operator{
+		background-color: #555555;
+	}
+	.clr{
+		background-color: #f44336;;
+	}
+	.hasil{
+		background-color: #008CBA;
+	}
+	.header{
+		text-align: center;
+		padding: 20px;
+		padding-bottom: 20px;
+	}
+	#satu{
+		background-color: blue;
+		float: center;
+		padding: 50px;
+		margin: 10% 30%;
+	}
+	</style>
+	<script type="text/javascript">
+		var bil1;
+		var bil2;
+		var hasil;
+		var operator;
+		var operator_seleksi = false;
+
+		function button(angka) {
+			var display = document.getElementById("output").value;
+			if (display == "0") {
+				display = angka; 
+			} else {
+				display += angka;
+			}
+			document.getElementById("output").value = display;
+		}
+ 		function clr() {
+			document.getElementById("output").value = "0";
+			bil1 = 0;
+			bil2 = 0;
+			operator_seleksi = false;
+		}
+ 		function button_operator(o) {
+			operator_seleksi = true;
+			bil1 = parseFloat(document.getElementById("output").value);
+			operator = o;
+			document.getElementById("output").value = "0";
+		}
+ 		function hitung() {
+			if (operator_seleksi == true) {
+				bil2 = parseInt(document.getElementById("output").value);
+				switch(operator){
+					case 1 :
+						hasil = bil1 * bil2;
+						document.getElementById("output").value = hasil;			
+						break;
+					case 2 :
+						hasil = bil1 / bil2;
+						document.getElementById("output").value = hasil;
+						break;
+					case 3 :
+						hasil = bil1 - bil2;
+						document.getElementById("output").value = hasil;
+						break;
+					case 4 :
+						hasil = bil1 + bil2;
+						document.getElementById("output").value = hasil;
+						break;
+					case 5 :
+						hasil = bil1 % bil2;
+						document.getElementById("output").value= hasil;
+				}
+				operator_seleksi = false
+				hasil = 0;
+				bil1 = 0;
+				bil2 = 0;
+			}
+		}
+	</script>
+</head>
+<body>
+	<center><div class="Header"><h1>Kalulator Sederhana</h1></div></center>
+	<center><div id="satu"><table>
+		<tr>
+			<td colspan="5">
+				<input type="text" disabled id="output" value="0">
+			</td>
+		</tr>
+		<tr>
+			<td><button class="button" onclick="button('1')">1</button></td>
+			<td><button class="button" onclick="button('2')">2</button></td>
+			<td><button class="button" onclick="button('3')">3</button></td>
+			<td><button class="button operator" onclick="button_operator(1)">*</button></td>
+		</tr>
+		<tr>
+			<td><button class="button" onclick="button('4')">4</button></td>
+			<td><button class="button" onclick="button('5')">5</button></td>
+			<td><button class="button" onclick="button('6')">6</button></td>
+			<td><button class="button operator" onclick="button_operator(2)">/</button></td>
+		</tr>
+		<tr>
+			<td><button class="button" onclick="button('7')">7</button></td>
+			<td><button class="button" onclick="button('8')">8</button></td>
+			<td><button class="button" onclick="button('9')">9</button></td>
+			<td><button class="button operator" onclick="button_operator(3)">-</button></td>
+		</tr>
+		<tr>
+			<td><button class="button" onclick="button('0')">0</button></td>
+			<td><button class="button clr" onclick="clr()">C</button></td>
+			<td><button class="button operator" onclick="button_operator(4)">+</button></td>
+			<td><button class="button operator" onclick="button_operator(5)">%</button></td>
+		</tr>
+		<tr>
+			<td colspan="5"><button class="button hasil" style="width: 100%" onclick="hitung()">=</button></td>
+		</tr>
+	</table></div></center>
+	
+</body>
+</html>
